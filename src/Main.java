@@ -179,36 +179,36 @@ public class Main {
         int sum=numbersMap.keySet().stream().mapToInt(i->(int)Math.pow(i,2)).sum();
         System.out.println(sum);
     }
-    private static void printNumbersInMapByLimit(Map<Integer,String> numbers,int limit){
+    private static void printNumbersInMapByLimit(Map<Integer,String> numbers,int limit){ // מגביל למספר מסויים
         numbers.entrySet().stream().limit(limit).map(Map.Entry::getKey).forEach(System.out::println);
     }
-    private static void printNumbersInMapBySkip(Map<Integer,String> numbers,int skip){
+    private static void printNumbersInMapBySkip(Map<Integer,String> numbers,int skip){ // מדלג מספר מסויים ואז 
         numbers.entrySet().stream().skip(skip).map(Map.Entry::getKey).forEach(System.out::println);
     }
-    private static void printNumbersInMapByJump(Map<Integer,String> numbersMap,int jump){
+    private static void printNumbersInMapByJump(Map<Integer,String> numbersMap,int jump){ // מתקדם בקפיצות של מספר מסויים
         numbersMap.entrySet().stream().filter(i->i.getKey()%jump==0).map(Map.Entry::getKey).forEach(System.out::println);
     }
-    private static void printEvenNumbersInMapStatus(Map<Integer,String> numbersMap){
-        System.out.println("at least one match: "+numbersMap.entrySet().stream().anyMatch(i->i.getKey()%2==0));
-        System.out.println("all match: "+numbersMap.entrySet().stream().allMatch(i->i.getKey()%2==0));
-        System.out.println("none match: "+numbersMap.entrySet().stream().noneMatch(i->i.getKey()%2==0));
+    private static void printEvenNumbersInMapStatus(Map<Integer,String> numbersMap){ 
+        System.out.println("at least one match: "+numbersMap.entrySet().stream().anyMatch(i->i.getKey()%2==0)); // האם קיים לפחות זוגי אחד
+        System.out.println("all match: "+numbersMap.entrySet().stream().allMatch(i->i.getKey()%2==0));          // האם כולם זוגיים
+        System.out.println("none match: "+numbersMap.entrySet().stream().noneMatch(i->i.getKey()%2==0));        // האם אף אחד לא זוגי
     }
     private static void printMaxAndMinNumberInMap(Map<Integer,String> numbersMap){
-        Optional<Integer> max=numbersMap.keySet().stream().max(Comparator.naturalOrder());System.out.println("max: "+max.get());
-        Optional<Integer> min=numbersMap.keySet().stream().min(Comparator.naturalOrder());System.out.println("min: "+min.get());
+        Optional<Integer> max=numbersMap.keySet().stream().max(Comparator.naturalOrder());System.out.println("max: "+max.get()); // מדפיס את המספר הגדול ביותר
+        Optional<Integer> min=numbersMap.keySet().stream().min(Comparator.naturalOrder());System.out.println("min: "+min.get()); // מדפיס את המספר הקטן ביותר
     }
-    private static void printDuplicatesInMapRemoval(Map<Integer,String> duplicatesMap){
+    private static void printDuplicatesInMapRemoval(Map<Integer,String> duplicatesMap){ // מדפיס את כל המספרים שקיימים להם כפילויות
         List<String> noDuplicates=duplicatesMap.values().stream().distinct().toList();noDuplicates.forEach(System.out::println);
     }
 
 
-    private static void printNamesWhoStartsWithCertainCharInConstructor(char character){
+    private static void printNamesWhoStartsWithCertainCharInConstructor(char character){ // מדפיס שמות שמתחילים באות מסויימת
         Person.getPeople().stream().filter(person -> person.getFirstName().toLowerCase().startsWith(Character.toString(character))).forEach(person -> System.out.println(person.getFirstName()));
     }
-    private static void printOldestPersonInConstructor(){
+    private static void printOldestPersonInConstructor(){ // מדפיס את האדם מהבוגר ביותר
         OptionalInt maxAge = Person.getPeople().stream().mapToInt(Person::getAge).max();System.out.println("oldest: "+maxAge.getAsInt());
     }
-    private static List<Person> createListsOfEveryFieldInTheConstructorThenPrintAsOne(){
+    private static List<Person> createListsOfEveryFieldInTheConstructorThenPrintAsOne(){ // מפרק את הבנאי לרשימות על סמך כל אחד משדותיו
         List<String> firstNames=Person.getPeople().stream().map(Person::getFirstName).toList();
         List<String> lastNames=Person.getPeople().stream().map(Person::getLastName).toList();
         List<String> fullNames=Person.getPeople().stream().map(person -> person.getFirstName()+" "+person.getLastName()).toList();
@@ -218,34 +218,34 @@ public class Main {
         IntStream.range(0,fullNames.size()).forEach(i-> System.out.println(fullNames.get(i)+professions.get(i)+ages.get(i)+ids.get(i)));
 
         List<Person> people=new ArrayList<>();
-        IntStream.range(0,firstNames.size()).
+        IntStream.range(0,firstNames.size()). 
                 forEach(person->people.add(new Person(firstNames.get(person),lastNames.get(person), professions.get(person),ages.get(person),ids.get(person))));
         return people;
     }
 
 
-    private static void combineListsOfNumbersIntoOneList(List<List<Integer>> lists){
+    private static void combineListsOfNumbersIntoOneList(List<List<Integer>> lists){  // מחבר כמה רשימות מאותו סוג לרשימה אחת
         List<Integer> allNumbers = lists.stream().flatMap(list -> list.stream()).collect(Collectors.toList());
         System.out.println(allNumbers);
     }
-    private static void combineListsOfStringIntoOne(List<String> words){
+    private static void combineListsOfStringIntoOne(List<String> words){ // מחבר כמה רשימות מאותו סוג לרשימה אחת
         Stream<Character> characters = words.stream().flatMap(word -> word.chars().mapToObj(c -> (char) c));
         characters.forEach(System.out::print);
     }
-    private static void printByAscendingOrder(List<Integer> numbersList){
+    private static void printByAscendingOrder(List<Integer> numbersList){ // מדפיס מהקטן לגדול ביותר
         numbersList.stream().sorted().forEach(System.out::println);
     }
-    private static void printByDescendingOrder(List<Integer> numbersList){
+    private static void printByDescendingOrder(List<Integer> numbersList){ // מדפיס מהקטן לגדול ביותר
         numbersList.stream().sorted(Comparator.reverseOrder()).forEach(System.out::println);
     }
-    private static void printByAlphabeticalOrder(String[] strings){
+    private static void printByAlphabeticalOrder(String[] strings){ // מדפיס לפי סדר האלף בית
         String[] sortedStrings = Arrays.stream(strings).sorted().toArray(String[]::new);
         Arrays.stream(sortedStrings).forEach(System.out::println);
     }
-    private static void printByReverseAlphabeticOrder(String[] strings){
+    private static void printByReverseAlphabeticOrder(String[] strings){ // מדפיס לפי סדר האלף בית אבל מ-ת' עד א'
         Arrays.stream(strings).sorted(Comparator.reverseOrder()).forEach(System.out::println);
     }
-    private static void printByCertainChar(String[] strings,char character){
+    private static void printByCertainChar(String[] strings,char character){ 
         Arrays.stream(strings).filter(i->i.startsWith(String.valueOf(character))).forEach(System.out::println);
     }
 
